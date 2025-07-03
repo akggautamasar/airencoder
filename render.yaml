@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: video-encoder-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    plan: free
+    envVars:
+      - key: API_ID
+        sync: false
+      - key: API_HASH
+        sync: false
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: MAX_FILE_SIZE
+        value: "2147483648"
+      - key: WATERMARK_TEXT
+        value: "@YourBrand"
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    disk:
+      name: video-storage
+      mountPath: /app/storage
+      sizeGB: 10
